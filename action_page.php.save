@@ -1,0 +1,26 @@
+<?php
+$serveur = "localhost";
+$dbname = "groupe21";
+$user = "groupe21";
+$pass = "12345";
+
+$prenom = $_POST["prenom"];
+$nom = $_POST["nom"];
+$email = $_POST["email"];
+$pwd = $_POST["psw"];
+$pwd2 = $_POST["psw-repeat"];
+
+try{
+        //On se connecte à la BDD
+        $dbco = new PDO("mysql:host=$serveur;dbname=$dbname",$user,$pass);
+        $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	echo $prenom, $nom;
+           //On insère les données reçues
+        $query = $this->pdo->prepare('INSERT INTO Post (title,content,author_id,created_at,img) VALUES (:title,:content,:author_id,:created_at,:img)');
+        //On renvoie l'utilisateur vers la page de remerciement
+       // header("Location:form-merci.html");
+    }
+    catch(PDOException $e){
+        echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
+    }
+?>
